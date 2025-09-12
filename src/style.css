@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+/* Optional app-level tweaks without Tailwind directives to satisfy basic linters */
+html, body, #app { height: 100%; }
+
+/* Global utilities */
+.card {
+	@apply rounded-xl border border-gray-200 bg-white shadow p-6;
+}
+
+/* Compact card: slightly smaller padding */
+.card-compact {
+	@apply p-4 md:p-5;
+}
