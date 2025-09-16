@@ -1,3 +1,19 @@
+<script setup lang="ts">
+import { onMounted, onUnmounted } from 'vue'
+
+const props = defineProps<{ modelValue: boolean }>()
+const emit = defineEmits<{ (e: 'update:modelValue', v: boolean): void }>()
+
+const close = () => emit('update:modelValue', false)
+
+const onKey = (e: KeyboardEvent) => {
+  if (e.key === 'Escape' && props.modelValue) close()
+}
+
+onMounted(() => window.addEventListener('keydown', onKey))
+onUnmounted(() => window.removeEventListener('keydown', onKey))
+</script>
+
 <template>
   <!-- Backdrop -->
   <transition name="fade">
@@ -44,22 +60,6 @@
     </aside>
   </transition>
 </template>
-
-<script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue'
-
-const props = defineProps<{ modelValue: boolean }>()
-const emit = defineEmits<{ (e: 'update:modelValue', v: boolean): void }>()
-
-const close = () => emit('update:modelValue', false)
-
-const onKey = (e: KeyboardEvent) => {
-  if (e.key === 'Escape' && props.modelValue) close()
-}
-
-onMounted(() => window.addEventListener('keydown', onKey))
-onUnmounted(() => window.removeEventListener('keydown', onKey))
-</script>
 
 <style scoped>
 .fade-enter-active, .fade-leave-active { transition: opacity 150ms ease; }
